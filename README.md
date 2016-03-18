@@ -1,5 +1,5 @@
 # myvimrc
-1. cp .vimrc .vim ~
+1. cp .vimrc .vim ~ -rf
 2. mkdir ~/.vim/bundle
 3. git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 4. push button F6 to install plugins in vim

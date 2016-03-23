@@ -14,10 +14,9 @@ endif
 "================================================================
 "颜色模式
 "================================================================
-colorscheme molokai
-"colorscheme desert
-"colorscheme ron
-"colorscheme ego
+"colorscheme molokai
+colorscheme desert
+"colorscheme solarized
 
 "================================================================
 "文件类型探测
@@ -25,6 +24,7 @@ colorscheme molokai
 filetype on
 filetype plugin on
 
+"set background=light
 set background=dark
 
 "================================================================
@@ -72,7 +72,7 @@ set cinoptions={0,1s,t0,n-2,p2s,(03s,=.5s,>1s,=1s,:1s
 "set expandtab
 "set smarttab
 "retab
- 
+
 "================================================================
 "显示括号配对情况
 "================================================================
@@ -102,7 +102,7 @@ set mouse=v
 "Line number
 "================================================================
 set number
- 
+
 "================================================================
 " keep 1500 lines of command line history
 "================================================================
@@ -126,10 +126,8 @@ set showcmd
 set showmode
 
 "================================================================
-"输入字符串就显示匹配点
 "搜索时高亮显示被找到的文本
 "================================================================
-set incsearch
 set hlsearch
 
 "================================================================
@@ -165,7 +163,7 @@ set autochdir
 "================================================================
 "突出显示当前行
 "================================================================
-set cursorline
+"set cursorline
 
 "================================================================
 "覆盖文件时不备份
@@ -248,14 +246,16 @@ let Tlist_Show_One_File=1
 let Tlist_Exit_OnlyWindow=1
 
 "========================================================
-"minibuffer setting
+"airline
 "========================================================
-let g:miniBufExplMapWindowNavVim           = 1
-let g:miniBufExplMapWindowNavArrows        = 1
-let g:miniBufExplMapCTabSwitchBufs         = 1
-let g:miniBufExplModSelTarget              = 1
-let g:miniBufExplTabWrap                   = 1
-let g:miniBufExplUseSingleClick            = 1
+let g:airline#extensions#tabline#enabled	= 1
+let g:airline#extensions#tabline#buffer_nr_show	= 1
+let g:airline_powerline_fonts				= 1
+let g:airline#extensions#whitespace#enabled = 0
+let g:airline#extensions#whitespace#symbol	= '!'
+set t_Co=256
+"let g:airline_section_b						= '%{strftime("%c")}'
+"let g:airline_section_y						= 'BN: %{bufnr("%")}'
 
 "========================================================
 "ycm setting
@@ -271,16 +271,17 @@ let g:ycm_python_binary_path = '/usr/bin/python3'
 "========================================================
 " key map
 "========================================================
-noremap <silent><F9> :A<CR>
-noremap <silent><F3> :Grep<CR>
 noremap <silent><F6> :PluginInstall<CR> 
 "用空格键来打开/关闭折叠
-nnoremap <silent><space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR> 
+"nnoremap <silent><space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR> 
 "开关文件浏览器
 noremap <silent><C-z> :NERDTreeToggle<CR>
 "在文件浏览器中定位当前文件
 noremap <silent><F2>f :NERDTreeFind<CR>
 noremap <silent><C-x> :TagbarToggle<CR>
+" toggle between vim mouse
+noremap <silent><C-m> :let &mouse=(&mouse == "a"?"v":"a")<CR>
+noremap <silent><C-n> :bn<CR>
 "ycm jumper
 noremap <silent><F4> :YcmDiags<CR>
 "noremap <silent><C-[> :YcmCompleter GoToDeclaration<CR>
@@ -297,15 +298,14 @@ set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/vundle
 call vundle#rc()
+"目录
 Bundle 'scrooloose/nerdtree'
+"函数列表
 Bundle 'majutsushi/tagbar'
-Bundle 'techlivezheng/vim-plugin-minibufexpl'
+"轻量级的powerline
+Bundle 'vim-airline/vim-airline'
 Bundle 'Valloric/YouCompleteMe'
-Bundle 'rdnetto/YCM-Generator'
+"Bundle 'rdnetto/YCM-Generator'
 Bundle 'fatih/vim-go'
 
 filetype plugin indent on
-"================================================================
-"
-"================================================================
-

@@ -260,18 +260,54 @@ set t_Co=256
 "========================================================
 "ycm setting
 "========================================================
-let g:ycm_global_ycm_extra_conf		= '~/.ycm_extra_conf.py'
-let g:ycm_semantic_triggers			= {}
-let g:ycm_semantic_triggers.c		= ['->', '.', ' ', '(', '[', '&']
-let g:ycm_error_symbol				= '>>'
 let g:ycm_warning_symbol			= '>*'
-let g:ycm_server_log_level = 'debug'
-let g:ycm_python_binary_path = '/usr/bin/python3'
+let g:ycm_always_populate_location_list = 1
+let g:ycm_complete_in_comments = 1
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
+let g:ycm_seed_identifiers_with_syntax = 1
+let g:ycm_auto_start_csharp_server = 0
+let g:ycm_add_preview_to_completeopt = 1
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_autoclose_preview_window_after_insertion = 1
+let g:ycm_global_ycm_extra_conf		= '~/.ycm_extra_conf.py'
+let g:ycm_filepath_completion_use_working_dir = 1
+
+"================================================================
+" ctags在当前目录找不到tags文件就向父目录找
+"================================================================
+set tags=tags;
+
+if has("cscope")
+	set csprg=/usr/bin/cscope
+	set csto=0
+	set cst
+	set nocsverb
+	" add any database in current directory
+	if filereadable("cscope.out")
+		cs add cscope.out
+		" else add database pointed to by environment
+	elseif $CSCOPE_DB != ""
+		cs add $CSCOPE_DB
+	endif
+	set csverb
+endif
+
+"========================================================
+"go-vim settings
+"========================================================
+let g:go_highlight_functions               = 1
+let g:go_highlight_methods                 = 1
+let g:go_highlight_structs                 = 1
+let g:go_fmt_fail_silently                 = 1
+let g:go_disable_autoinstall               = 1
+let g:go_fmt_autosave                      = 1
+" let g:go_fmt_command                     = "goimports"
 
 "========================================================
 " key map
 "========================================================
-noremap <silent><F6> :PluginInstall<CR> 
+noremap <silent><F6> :BundleInstall<CR> 
 "用空格键来打开/关闭折叠
 "nnoremap <silent><space> @=((foldclosed(line('.')) < 0) ? 'zc' : 'zo')<CR> 
 "开关文件浏览器
@@ -281,12 +317,13 @@ noremap <silent><F2>f :NERDTreeFind<CR>
 noremap <silent><C-x> :TagbarToggle<CR>
 " toggle between vim mouse
 noremap <silent><C-m> :let &mouse=(&mouse == "a"?"v":"a")<CR>
+nmap ga <Plug>(EasyAlign)
 noremap <silent><C-n> :bn<CR>
 "ycm jumper
 noremap <silent><F4> :YcmDiags<CR>
 "noremap <silent><C-[> :YcmCompleter GoToDeclaration<CR>
-noremap <silent><C-]> :YcmCompleter GoToDefinition<CR>
-"noremap <silent><C-a> :YcmCompleter GoToDefinitionElseDeclaration<CR>
+noremap <silent><C-p> :YcmCompleter GoToDefinition<CR>
+"noremap <silent><C-p> :YcmCompleter GoToDefinitionElseDeclaration<CR>
 "nnoremap <leader>gl :YcmCompleter GoToDeclaration<CR>
 "nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
 "nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
@@ -302,10 +339,12 @@ call vundle#rc()
 Bundle 'scrooloose/nerdtree'
 "函数列表
 Bundle 'majutsushi/tagbar'
+"自动对齐
+Bundle 'junegunn/vim-easy-align'
 "轻量级的powerline
 Bundle 'vim-airline/vim-airline'
 Bundle 'Valloric/YouCompleteMe'
-"Bundle 'rdnetto/YCM-Generator'
+Bundle 'rdnetto/YCM-Generator'
 Bundle 'fatih/vim-go'
 
 filetype plugin indent on

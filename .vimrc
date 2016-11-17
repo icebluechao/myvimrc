@@ -346,6 +346,10 @@ noremap <silent><C-p> :YcmCompleter GoToDefinition<CR>
 "nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
 "nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
+"markdown
+au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=mkd
+let g:vim_markdown_folding_disabled=1
+
 "========================================================
 " plug settings
 "========================================================
@@ -364,5 +368,7 @@ Bundle 'vim-airline/vim-airline'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'rdnetto/YCM-Generator'
 "Bundle 'fatih/vim-go'
+"markdown
+Bundle 'plasticboy/vim-markdown'
 
 filetype plugin indent on

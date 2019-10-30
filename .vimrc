@@ -6,17 +6,12 @@ set nocompatible
 "================================================================
 "高亮模式
 "================================================================
-"syntax enable
-if has("syntax")
-syntax on
-endif
+syntax enable
 
 "================================================================
 "颜色模式
 "================================================================
-"colorscheme molokai
 colorscheme desert
-"colorscheme solarized
 
 "================================================================
 "文件类型探测
@@ -30,33 +25,24 @@ set background=dark
 "================================================================
 "打开文件时自动到达上次浏览时的位置
 "================================================================
-"set      viminfo='1000,f1,<500
+set      viminfo='1000,f1,<500
 if has("autocmd")
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 filetype plugin indent on
-"git commit添加注释时设置最大宽度和自动换行
-"autocmd  Filetype gitcommit setlocal spell textwidth=72
 endif
 
 "========================================================
 "搜索时及时匹配且不忽略大小写
 "========================================================
 set incsearch
-"set ignorecase
 set smartcase
-
-"========================================================
-"自动把内容写回文件: 如果文件被修改过，在每个 :next、:rewind、:last、:first、:previous、:stop、:suspend、:tag、:!、:make、CTRL-] 和 CTRL-^命令时进行；用 :buffer、CTRL-O、CTRL-I、'{A-Z0-9} 或 `{A-Z0-9} 命令转到别的文件时亦然。
-"========================================================
-"set autowrite
 
 "================================================================
 "Autoindent
 "打开普通文件类型的自动缩进。 该自动缩进不如 cindent 智能， 但它可以为你编辑非C/C++ 文件提供一定帮助。
 "================================================================
 set autoindent 
-set cindent
-"set smartindent
+set smartindent
 
 "================================================================
 "tab indent
@@ -64,6 +50,7 @@ set cindent
 set shiftwidth =4
 set softtabstop=4
 set tabstop=4
+set textwidth=79
 set cinoptions={0,1s,t0,p2s,(03s,=.5s,>1s,=1s,:1s
 
 "================================================================
@@ -84,16 +71,6 @@ set showmatch
 set linebreak
 
 "================================================================
-"自动折行
-"================================================================
-"set wrap
-
-"================================================================
-"光标从行首和行末时可以跳到另一行去
-"================================================================
-"set whichwrap=b,s,<,>,[,]
-
-"================================================================
 "如果去掉这一行,默认值set mouse=a就生效了,这时不能用鼠标选中复制.
 "================================================================
 set mouse=v
@@ -111,7 +88,7 @@ set history=1500
 "================================================================
 "总显示最后一个窗口的状态行；设为1则窗口数多于一个的时候显示最后一个窗口的状态行；0不显示最后一个窗口的状态行
 "================================================================
-set laststatus=2
+set laststatus=1
 
 "================================================================
 "标尺，用于显示光标位置的行号和列号，逗号分隔。每个窗口都有自己的标尺。如果窗口有状态行，标尺在那里显示。否则，它显示在屏幕的最后一行上。
@@ -370,10 +347,6 @@ noremap <silent><C-p> :YcmCompleter GoToDefinition<CR>
 "nnoremap <leader>gg :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nnoremap <slient><space> :za<CR>
 autocmd FileType python nnoremap <LocalLeader>= :0,$!yapf<CR>
-nmap <silent> <F8> <Plug>MarkdownPreview
-imap <silent> <F8> <Plug>MarkdownPreview
-nmap <silent> <F9> <Plug>StopMarkdownPreview
-imap <silent> <F9> <Plug>StopMarkdownPreview
 "普通模式下，sp前往上一个错误或警告，sn前往下一个错误或警告
 nmap sp <Plug>(ale_previous_wrap)
 nmap sn <Plug>(ale_next_wrap)
@@ -386,24 +359,6 @@ nmap <Leader>d :ALEDetail<CR>
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn} set filetype=mkd
 let g:vim_markdown_folding_disabled=1
 
-" path to the chrome or the command to open chrome(or other modern browsers)
-let g:mkdp_path_to_chrome = "chromium-browser"
-" set to 1, the vim will open the preview window once enter the markdown
-" buffer
-let g:mkdp_auto_start = 0
-" set to 1, the vim will auto open preview window when you edit the markdown
-" file
-let g:mkdp_auto_open = 0
-" set to 1, the vim will auto close current preview window when change from
-" markdown buffer to another buffer
-let g:mkdp_auto_close = 1
-" set to 1, the vim will just refresh markdown when save the buffer or leave
-" from insert mode, default 0 is auto refresh markdown as you edit or move the
-" cursor
-let g:mkdp_refresh_slow = 0
-" set to 1, the MarkdownPreview command can be use for all files, by default
-" it just can be use in markdown file
-let g:mkdp_command_for_global = 0
 
 "========================================================
 " plug settings
@@ -427,6 +382,6 @@ Bundle 'google/yapf'
 "Bundle 'fatih/vim-go'
 "markdown
 Bundle 'plasticboy/vim-markdown'
-Bundle 'iamcco/markdown-preview.vim'
+Bundle 'vim-scripts/indentpython.vim'
 
 filetype plugin indent on

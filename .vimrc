@@ -175,12 +175,7 @@ set completeopt=longest,menu
 "================================================================
 "Foldmethod
 "================================================================
-set fdm=marker
-"set fdm=syntax
- 
-set foldenable
-set foldmethod=manual
-set foldlevel=1
+set nofoldenable
 
 "===============================================================
 "Highlight All Math Operator
